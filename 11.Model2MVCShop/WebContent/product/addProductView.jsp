@@ -23,7 +23,16 @@
 		<script type="text/javascript">
 		
 			//==================  "등록"      Event  연결 ==================
-			 $(function()	{
+			 	$(function()    {
+			 		
+			 		$('.i').on("click" , function() {
+			 			alert(  );
+			 			//show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value);
+			 			show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value);
+			 		});
+			 	});
+			 					
+				$(function()	{
 				 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName)  :  2.(#id)  :  3.$(.className)
 				 $(  "button.btn.btn-primary").on("click" , function() {
 					fncAddProduct();	 
@@ -31,16 +40,16 @@
 			 });
 			
 			
-			 $(function() {
-				 //==> DOM Object GET
-			 	  $("button.btn.btn-info").on("click" , function() {
-			 		 popWin
-			 		 = window.open("/product/prodNameCheckDuplication.jsp",
-			 				 						"popWin",
-			 				 						"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
-			 				 						"scrollbars=no,scrolling=no,menubar=no,resizable=no");  
-			 	  });
-			 });
+// 			 $(function() {
+// 				 //==> DOM Object GET
+// 			 	  $("button.btn.btn-info").on("click" , function() {
+// 			 		 popWin
+// 			 		 = window.open("/product/prodNameCheckDuplication.jsp",
+// 			 				 						"popWin",
+// 			 				 						"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
+// 			 				 						"scrollbars=no,scrolling=no,menubar=no,resizable=no");  
+// 			 	  });
+// 			 });
 		
 			function fncAddProduct(){
 				//Form 유효성 검증
@@ -61,10 +70,10 @@
 					alert("상품상세정보는 반드시 입력하여야 합니다.");
 					return;
 				}
-				if(manuDate == null || manuDate.length<1){
-					alert("제조일자는 반드시 입력하셔야 합니다.");
-					return;
-				}
+ 				if(manuDate == null || manuDate.length<1){
+ 					alert("제조일자는 반드시 입력하셔야 합니다.");
+ 					return;
+ 				}
 				if(price == null || price.length<1){
 					alert("가격은 반드시 입력하셔야 합니다.");
 					return;
@@ -99,20 +108,20 @@
 		<h1 class="bg-primary text-center">상 품 등 록</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form class="form-horizontal" name='detailForm'>
 		
 		  <div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상 품 명</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="중복확인하세요"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">상품번호는 변경불가</strong>
-		      </span>
+		      <input type="text" class="form-control" id="prodName" name="prodName" >
+<!-- 		       <span id="helpBlock" class="help-block"> -->
+<!-- 		      	<strong class="text-danger">상품번호는 변경불가</strong> -->
+<!-- 		      </span> -->
 		    </div>
-		    <div class="col-sm-3">
-		      <button type="button" class="btn btn-info">중복확인</button>
+<!-- 		    <div class="col-sm-3"> -->
+<!-- 		      <button type="button" class="btn btn-info">중복확인</button> -->
+<!-- 		    </div> -->
 		    </div>
-		  </div>
 		  
 		  <div class="form-group">
 		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품상세</label>
@@ -120,14 +129,26 @@
 		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" placeholder="상품상세">
 		    </div>
 		  </div>
-		  
+		  		  
+<!-- 		  <td width="104" class="ct_write"> -->
+<!-- 			제조일자 <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/> -->
+<!-- 		</td> -->
+<!-- 		<td bgcolor="D6D6D6" width="1"></td> -->
+<!-- 		<td class="ct_write01"> -->
+<!-- 			<input type="text" readonly="readonly" name="manuDate"  	 -->
+<!-- 						class="ct_input_g" style="width: 100px; height: 19px" maxLength="10" minLength="6">&nbsp; -->
+<!-- 						<img 	src="../images/ct_icon_date.gif" width="15" height="15"  -->
+<!-- 									onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)" /> -->
+<!-- 		</td>		   -->
+		  		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
-		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
-		    </div>
+		  	<label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
+		  	<div class="col-sm-4">
+		  		<input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자">
+				<img src="../images/ct_icon_date.gif" width="15" height="15" class='i' />	  	
+		  	</div>
 		  </div>
-		  
+		  		  		  
 		  <div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
@@ -140,7 +161,7 @@
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="fileName" name="fileName" placeholder="상품이미지">
 		      <span id="helpBlock" class="help-block">
-		      	 <strong class="text-danger">" -  " 제외 13자리입력하세요</strong>
+		      	 <strong class="text-danger"></strong>
 		      </span>
 		    </div>
 		  </div>  

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MusicMapper">
+ 	
+ 	
+	<resultMap id="musicSelectMap" type="music">
+		<result property="musicName" 			column="music_name" 			jdbcType="VARCHAR"/>
+		<result property="singer" 			column="singer" 			jdbcType="VARCHAR"/>
+		
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="findMusic"	parameterType="string"	resultMap="musicSelectMap">
+		SELECT
+		music_name , singer 		
+		FROM music 
+		WHERE music_name = #{value}
+	 </select>
+	 
+	
+	 
+</mapper>

@@ -154,12 +154,12 @@ public class UserController {
 	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 		
 		System.out.println("/user/listUser : GET / POST");
-		
+		System.out.println("model : "+model);
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-		
+		System.out.println(search);
 		// Business logic ผ๖วเ
 		Map<String , Object> map=userService.getUserList(search);
 		

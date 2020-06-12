@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,7 +26,7 @@
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
-	<!--  CSS Ãß°¡ : Åø¹Ù¿¡ È­¸é °¡¸®´Â Çö»ó ÇØ°á :  ÁÖ¼®Ã³¸® Àü, ÈÄ È®ÀÎ-->
+	<!--  CSS ì¶”ê°€ : íˆ´ë°”ì— í™”ë©´ ê°€ë¦¬ëŠ” í˜„ìƒ í•´ê²° :  ì£¼ì„ì²˜ë¦¬ ì „, í›„ í™•ì¸-->
 	<style>
         body {
             padding-top : 70px;
@@ -35,100 +35,84 @@
    	
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
      <script type="text/javascript"> 
-		     var aa = true;
-		     function playss(){
-		
-		    if(aa){
-		     player.play();
-		     aa = false;
-		     }else{
-		     player.pause();player.currentTime=0;
-		     aa = true;
-		     }
-		     }
+     	$(function(){
+     		
+   		$(  "#buttonfrance"  ).on("click" , function() { 
+  		    	
+      			var translateMessage = $("#ii").children().html(); 
+      			
+      			
+     			
+      			$.ajax( 
+     					{
+       						url : "/papago/json/playpapago/"+translateMessage ,
+       						method : "GET" , 
+      						dataType : "json" , 
+     						headers : {
+      							"Accept" : "application/json" , 
+     							"Content-Type" : "application/json" 
+     						}, //end header
+      						success : function(JSONData , status) { 	
+      							var translated = confirm(JSONData.message.result.translatedText);
+     						} //end success
+     					}) //end ajax	    	
+     						alert(translated)
+ 	    });//end button function 
+ 	    
+ 	    
+ 	   $(  "#buttonkorean"  ).on("click" , function() { 
+		    	
+ 			
+//  		  $.ajax( 
+// 					{
+//  						url : "/papago/json/playpapago2" ,
+//  						method : "GET" , 
+//  						data : {
+//  											name : $("")
+//  						}
+// 						dataType : "json" , 
+// 						headers : {
+// 							"Accept" : "application/json" , 
+// 							"Content-Type" : "application/json" 
+// 						}, //end header
+// 						success : function(JSONData , status) { 	
+// 							var translatedkr = confirm(JSONData.message.result.translatedText);
+// 						} //end success
+// 					}) //end ajax	 
+ 		   
+ 		   					var translatedkr = confirm("ì˜¤ëŠ˜ ë‚˜ì˜ ë¶ˆí–‰ì€ ì–¸ì  ê°€ ë‚´ê°€ ì˜ëª» ë³´ë‚¸ ì‹œê°„ì˜ ë³´ë³µì´ë‹¤")	    	
 
+ 							alert(translatedkr)
+    	});//end button function 
+      	
+  	   $(  "#buttonfrance3"  ).on("click" , function() { 
+	    				var message = $('.c').text();
+  		   				alert(message)
+			
+		  $.ajax( 
+					{
+						url : "/papago/json/playpapago2/"+message ,
+						method : "GET" , 
+						dataType : "json" , 
+						headers : {
+							"Accept" : "application/json" , 
+							"Content-Type" : "application/json" 
+						}, //end header
+						success : function(JSONData , status) { 	
+							var translatedfr = confirm(JSONData.message.result.translatedText);
+						} //end success
+					}) //end ajax	 
+					var translatedkr = confirm("ë‚˜ëŠ” ë‹¤ë§Œ ì†ì— ë‹¿ì„ ìˆ˜ ìˆëŠ” ê²ƒì„ ì¶”êµ¬í•  ë¿ì´ë‹¤")	
+							alert(translatedfr)
+							
+ 							alert(translatedkr)
+ 	});//end button function 
+    	
+    	
+     	}) 		    		    
+	 </script> 
 
-     
-     
-			(function(){    
-			
-			     if(!/complete|interactive/.test(document.readyState)) 
-			
-			         return setTimeout(arguments.callee); 
-			
-			      
-			
-			     var $audio; 
-			
-			     var all = document.body.getElementsByTagName('*');
-			
-			     var i = all.length;
-			
-			     var group;
-			
-			     var j;
-			
-			     var node;
-			
-			     while(i-->0){
-			
-			      group = all[i];
-			
-			      if(group.className.indexOf('sounds') > -1){
-			
-					j = group.childNodes.length;
-					
-					while(j-->0){
-					
-					node = group.childNodes[j];
-					
-					if(node.nodeType==1 && node.getAttribute('data-sound')){
-					
-					node.onclick = audio;
-					
-					}
-					
-					}
-					
-					      }
-					
-					     }
-					
-					     return; 
-			
-			      
-			
-			     function audio(){ 
-			
-			            if(!$audio){ 
-			
-			                   $audio = document.createElement('audio'); 
-			
-			                   $audio.type = 'audio/mpeg'; 
-			
-			                   $audio.autoplay = true; 
-			
-			                   (document.body || document.documentElement).appendChild($audio); 
-			
-			            } 
-			
-			            $audio.src = this.getAttribute('data-sound'); 
-			
-			     } 
-			
-			})() 
-
-</script> 
-
-<div class="sounds">
-
-<a data-sound="../sound/Moon-02-How.mp3">¹®º¸¶ó-02-¾î¶»°Ô.mp3</a> 
-
-
-
-</div>
 	 	
-	
 </head>
 	
 <body>
@@ -137,35 +121,58 @@
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  ¾Æ·¡ÀÇ ³»¿ëÀº http://getbootstrap.com/getting-started/  ÂüÁ¶ -->	
+	<!--  ì•„ë˜ì˜ ë‚´ìš©ì€ http://getbootstrap.com/getting-started/  ì°¸ì¡° -->	
    	<div class="container ">
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Model2MVCShop </h1>
-        <p>J2SE , DBMS ,JDBC , Servlet & JSP, Java Framework , HTML5 , UI Framework ÇĞ½À ÈÄ Mini-Project ÁøÇà</p>
+        <p>J2SE , DBMS ,JDBC , Servlet & JSP, Java Framework , HTML5 , UI Framework í•™ìŠµ í›„ Mini-Project ì§„í–‰</p>
      </div>
     </div>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   : container part..... -->
-	<div class="container">
-        <h3>³ªÆú·¹¿ËÀº ÀÌ·¸°Ô ¸»Çß´Ù.</h3>
-        <p>"¿À´Ã ³ªÀÇ ºÒÇàÀº ¾ğÁ¨°¡ ³»°¡ Àß¸ø º¸³½ ½Ã°£ÀÇ º¸º¹ÀÌ´Ù."</p>
-        </br>
-        </br>
-        </br>
-        <audio id="player" controls="controls" loop="loop" preload="auto">
-			<source src="../sound/Moon-02-How.mp3" type="audio/mpeg" />
-			</audio>
-
- 			<br />
-			<img src="../images/uploadFiles/lama.jpg" style="cursor:Pointer;" onclick="javascript:playss()" />
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   : container part..... -->
+	<div class="container" id="ii">
+        <h3>Mon malheur aujourd'hui est la vengeance d'un mauvais moment.</h3>
+  		<div class="row">
+	  		<div class="col-md-12 text-center ">
+	  			<button type="button" class="btn btn-primary" id="buttonfrance">ì˜ì–´</button>
+	  		</div>
+		</div>
+		<br/>
+		<br/>
+		<div class="row">
+	  		<div class="col-md-12 text-center ">
+	  			<button type="button" class="btn btn-primary" id="buttonkorean">í•œêµ­ì–´</button>
+	  		</div>
+		</div>
         
-  	 	<h3>"... Àåº®Àº Àı½ÇÇÏ°Ô ¿øÇÏÁö ¾Ê´Â »ç¶÷µéÀ» °É·¯³»·Á°í Á¸ÀçÇÕ´Ï´Ù. Àåº®Àº. ´ç½ÅÀÌ ¾Æ´Ï¶ó '´Ù¸¥' »ç¶÷µéÀ» ¸ØÃß°Ô ÇÏ·Á°í °Å±â ÀÖ´Â °ÍÀÌÁö¿ä."</h3>
-         <h3>Çı±¤½º´Ô</h3>
-         <p>Çàº¹ÇÑ »îÀÇ ºñ°áÀº.</p>
-         <p>ÁÁ¾ÆÇÏ´Â ÀÏÀ» ÇÏ´Â °ÍÀÌ ¾Æ¸®¶ó,</p>
-         <p>Áö±İ ÇÏ´Â ÀÏÀ» ÁÁ¾ÆÇÏ´Â °ÍÀÔ´Ï´Ù.</p>
-  	 </div>
+     <div>  
+  	 	<h3>"ì‹¸ìš¸ ìˆ˜ ìˆëŠ” ë‚ ì—” ì‹¸ìš°ë©´ ë˜ê³ "</h3>
+  	 	<h3>"ì‹¸ìš¸ ìˆ˜ ì—†ëŠ” ë‚ ì—” ì§€í‚¤ë©´ ë˜ê³ "</h3>
+  	 	<h3>"ì§€í‚¬ ìˆ˜ ì—†ëŠ” ë‚ ì—” í•­ë³µí•˜ë©´ ë˜ê³ "</h3>
+  	 	<h3>"í•­ë³µí•  ìˆ˜ ì—†ëŠ” ë‚ ì—” ê·¸ë‚  ì£½ìœ¼ë©´ ê·¸ë§Œì´ë„¤"</h3>
+         <h5>ì„ ë•ì—¬ì™•<ë“œë¼ë§ˆ></h5>
+     </div> 
+         <br/>
+         <br/>
+         
+         <p class="a">ë‚˜ëŠ” ì¸ë‚´í•˜ëŠ” ë°ì—ëŠ” ë§ˆìŒì„ ê°•í•˜ê²Œ í•˜ê³ <p>  		
+    
+         <p class="b">ìš•ì‹¬ì„ ë¶€ë¦¬ëŠ” ë°ì—ëŠ” ë§ˆìŒì„ ë‘”í•˜ê²Œ í•˜ê³  ìˆë‹¤</p>
+     
+         <p class="c">yesterday</p>
+         <p class="d">Je cherche ce que je peux mettre dans mes mains.</p>
+  	    <div class="row">
+	  		<div class="col-md-12 text-center ">
+	  			<button type="button" class="btn btn-primary" id="buttonfrance3">ì˜ì–´</button>
+	  		</div>
+		</div>
+  	
+  	
+  	
+  	</div>
+  	
+
 
 </body>
 

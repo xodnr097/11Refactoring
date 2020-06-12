@@ -21,6 +21,7 @@ import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
 
 
+
 //==> 회원관리 Controller
 @Controller
 @RequestMapping("/product/*")
@@ -61,7 +62,7 @@ public class ProductController {
 	
 	//@RequestMapping("/getProduct.do")
 	@RequestMapping( value = "getProduct")
-	public String getProduct( @RequestParam("prodNo") int prodNo , @RequestParam("menu") String menu, Model model ) throws Exception {
+	public String getProduct( @RequestParam("prodNo") int prodNo , Model model ) throws Exception {
 		
 		System.out.println("/product/getProduct : POST");
 		//Business Logic
@@ -69,15 +70,8 @@ public class ProductController {
 		// Model 과 View 연결
 		model.addAttribute("product", product);
 		
-		if(menu.contentEquals("manage")) {
-			return "forward:/product/updateProduct.jsp"; 
-		}else if(menu.contentEquals("search")) {
-			return "forward:/product/getProduct.jsp";
-		}else {
-			return "forward:/product/updateProduct.jsp";
-		}
-		
-		
+	
+			return "forward:/product/getProduct.jsp";		
 	}
 	
 	
@@ -86,6 +80,7 @@ public class ProductController {
 	public String updateProductView( @RequestParam("prodNo") int prodNo, Model model ) throws Exception{
 
 		System.out.println("/product/updateProductView");
+		System.out.println("prodNo : "+prodNo);
 		//Business Logic
 		Product product = productService.findProduct(prodNo);
 		// Model 과 View 연결
@@ -94,7 +89,7 @@ public class ProductController {
 		return "forward:/product/updateProduct.jsp";
 	}
 	
-	@RequestMapping("/updateProduct.do")
+	@RequestMapping("/updateProduct")
 	public String updateProduct( @ModelAttribute("product") Product product , Model model ) throws Exception{
 
 		System.out.println("/updateProduct");
@@ -109,6 +104,7 @@ public class ProductController {
 	public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 
 		System.out.println("/product/listProduct : GET / POST");
+		System.out.println("model : "+model);
 		//BusinessLogic
 		
 		
@@ -116,9 +112,12 @@ public class ProductController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-		
+		System.out.println("1");
+		System.out.println(search);
+		System.out.println("2");
 		// Business logic
 		Map<String, Object> map=productService.getProductList(search);
+		System.out.println("map : "+map);
 		
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);

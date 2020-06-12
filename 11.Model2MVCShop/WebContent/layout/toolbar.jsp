@@ -137,8 +137,8 @@
 		 $(function() {
 			//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		 	$("a:contains('魄概惑前包府')").on("click" , function() {
-				//$(self.location).attr("href","/user/logout");
-				self.location = "/product/listProduct"
+				$(self.location).attr("href","/product/listProduct?menu=manage");
+				//self.location = "/product/listProduct?menu=manage"
 			}); 
 		 });
 			
